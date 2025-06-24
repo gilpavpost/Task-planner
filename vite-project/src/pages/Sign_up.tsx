@@ -1,7 +1,8 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import AuthLayout from "../layouts/AuthLayout";
 
 const schema = z
   .object({
@@ -40,7 +41,7 @@ function Sign_up() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-sidebar">
+    <AuthLayout>
       <form
         onSubmit={handleSubmit(submitData)}
         className="font-rubik font-normal bg-white p-8 rounded-2xl shadow-lg w-full max-w-md space-y-4"
@@ -103,7 +104,7 @@ function Sign_up() {
 
         <button
           type="submit"
-          className="w-full mt-1 bg-fusion text-white cursor-pointer py-2 rounded-md hover:bg-fusion-dark transition "
+          className="w-full mt-1 bg-fusion text-white cursor-pointer py-2 rounded-md hover:bg-fusion-dark transition"
         >
           Зарегистрироваться
         </button>
@@ -115,7 +116,7 @@ function Sign_up() {
           </Link>
         </p>
       </form>
-    </div>
+    </AuthLayout>
   );
 }
 

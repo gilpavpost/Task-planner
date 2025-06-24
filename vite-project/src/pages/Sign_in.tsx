@@ -1,8 +1,8 @@
-import "../assets/css/style.css";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import AuthLayout from "../layouts/AuthLayout";
 
 const schema = z.object({
   login: z
@@ -22,22 +22,21 @@ function Sign_in() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  });
+  } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const submitData = (data: FormData) => {
     console.log("Сработало", data);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-sidebar">
+    <AuthLayout>
       <form
         className="font-rubik font-normal bg-white p-7 rounded-2xl shadow-lg w-full max-w-md space-y-3"
         onSubmit={handleSubmit(submitData)}
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Вход</h2>
-        <label className="block text-black font-medium"> Логин: </label>
+
+        <label className="block text-black font-medium">Логин:</label>
         <input
           type="text"
           {...register("login")}
@@ -45,7 +44,7 @@ function Sign_in() {
         />
         <p className="text-fusion text-sm">{errors.login?.message}</p>
 
-        <label className="block text-black font-medium"> Пароль: </label>
+        <label className="block text-black font-medium">Пароль:</label>
         <input
           type="password"
           {...register("password")}
@@ -67,7 +66,7 @@ function Sign_in() {
           </Link>
         </p>
       </form>
-    </div>
+    </AuthLayout>
   );
 }
 
