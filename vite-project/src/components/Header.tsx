@@ -2,7 +2,7 @@ import { Bell, Mail, ChevronDown, Search } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="h-[10%] flex items-center justify-between px-6 py-4 bg-white shadow-md">
+    <header className="h-[10%] flex items-center justify-between px-6 py-4 bg-white shadow-md font-rubik">
       <div className="relative w-full max-w-lg">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-black cursor-pointer" />
         <input

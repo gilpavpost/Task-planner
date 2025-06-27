@@ -3,51 +3,71 @@ import logo from "../assets/images/icon.svg";
 
 const Sidebar = () => {
   return (
-    <aside className="w-[20%] bg-sidebar min-h-screen flex flex-col">
-      <div className="p-6">
+    <aside className="w-[20%] bg-sidebar min-h-screen flex flex-col font-rubik font-medium text-black">
+      <div className="mr-auto ml-auto p-16">
         <img src={logo} alt="Logo" className="" />
       </div>
 
-      <nav className="flex flex-col gap-2 text-sm px-6">
+      <nav className="flex flex-col gap-2 text-sm px-6 max-w-[60%] ml-10">
         <NavLink
-          to="/clients"
+          to="/dashboard"
           className={({ isActive }) =>
             `flex items-center gap-2 py-2 px-3 rounded-md ${
-              isActive ? "bg-gray-200 font-semibold" : "text-gray-700"
+              isActive ? "bg-project" : "font-normal"
             }`
           }
         >
-          Clients
+          {({ isActive }) => (
+            <>
+              {isActive && <span className="text-lg">—</span>}
+              <span>Clients</span>
+            </>
+          )}
         </NavLink>
         <NavLink
-          to="/task-manager"
+          to="/task_manager"
           className={({ isActive }) =>
             `flex items-center gap-2 py-2 px-3 rounded-md ${
-              isActive ? "bg-gray-200 font-semibold" : "text-gray-700"
+              isActive ? "bg-project" : "font-normal"
             }`
           }
         >
-          Task manager
+          {({ isActive }) => (
+            <>
+              {isActive && <span className="text-lg">—</span>}
+              <span>Task manager</span>
+            </>
+          )}
         </NavLink>
         <NavLink
           to="/inbox"
           className={({ isActive }) =>
             `flex items-center gap-2 py-2 px-3 rounded-md ${
-              isActive ? "bg-gray-200 font-semibold" : "text-gray-700"
+              isActive ? "bg-project" : "font-normal"
             }`
           }
         >
-          Inbox
+          {({ isActive }) => (
+            <>
+              {isActive && <span className="text-lg">—</span>}
+              <span>Inbox</span>
+            </>
+          )}
         </NavLink>
         <NavLink
           to="/contacts"
           className={({ isActive }) =>
             `flex items-center gap-2 py-2 px-3 rounded-md ${
-              isActive ? "bg-gray-200 font-semibold" : "text-gray-700"
+              isActive ? "bg-project" : "font-normal"
             }`
           }
         >
-          Contacts
+          {({ isActive }) => (
+            <>
+              {isActive && <span className="text-lg">—</span>}
+              <span>Contacts</span>
+            </>
+          )}
         </NavLink>
       </nav>
     </aside>
