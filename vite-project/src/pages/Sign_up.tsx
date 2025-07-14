@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "../layouts/AuthLayout";
 
 const schema = z
@@ -32,12 +32,36 @@ function Sign_up() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  });
+  } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  const submitData = (data: FormData) => {
-    console.log("Сработало", data);
+  const navigate = useNavigate();
+
+  const submitData = async (data: FormData) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: data.login,
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Ошибка регистрации");
+      }
+
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("userId", result.userId);
+
+      console.log("✅ Успешная регистрация", result);
+      navigate("/");
+    } catch (err: any) {
+      alert(`Ошибка: ${err.message}`);
+    }
   };
 
   return (

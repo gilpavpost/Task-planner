@@ -43,12 +43,14 @@ const Card = () => {
           Export
         </button>
       </div>
+
       <div className="bg-project flex justify-between items-center mb-4"></div>
+
       <div className="flex flex-col space-y-3">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="flex items-center justify-between px-4 py-3 bg-project rounded-xl"
+            className="flex items-center justify-between px-4 py-3 bg-project rounded-xl transition-transform duration-300 ease-in-out hover:scale-103 hover:shadow-md cursor-pointer"
           >
             <div className="text-sm font-medium">{project.title}</div>
             <div className="flex items-center space-x-2 text-sm text-gray-600">

@@ -1,14 +1,11 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "../layouts/AuthLayout";
 
 const schema = z.object({
-  login: z
-    .string()
-    .min(5, { message: "Логин должен содержать минимум 5 символов" })
-    .max(30, { message: "Логин не может быть длиннее 30 символов" }),
+  email: z.string().email({ message: "Введите корректный email" }),
   password: z
     .string()
     .min(5, { message: "Пароль слишком короткий" })
@@ -24,8 +21,33 @@ function Sign_in() {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  const submitData = (data: FormData) => {
-    console.log("Сработало", data);
+  const navigate = useNavigate();
+
+  const submitData = async (data: FormData) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Ошибка входа");
+      }
+
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("userId", result.userId);
+
+      console.log("✅ Вход выполнен", result);
+      navigate("/dashboard");
+    } catch (err: any) {
+      alert(`Ошибка: ${err.message}`);
+    }
   };
 
   return (
@@ -36,13 +58,13 @@ function Sign_in() {
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Вход</h2>
 
-        <label className="block text-black font-medium">Логин:</label>
+        <label className="block text-black font-medium">Email:</label>
         <input
           type="text"
-          {...register("login")}
+          {...register("email")}
           className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
-        <p className="text-fusion text-sm">{errors.login?.message}</p>
+        <p className="text-fusion text-sm">{errors.email?.message}</p>
 
         <label className="block text-black font-medium">Пароль:</label>
         <input

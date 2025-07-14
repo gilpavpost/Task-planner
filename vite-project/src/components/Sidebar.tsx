@@ -40,7 +40,7 @@ const Sidebar = () => {
           )}
         </NavLink>
         <NavLink
-          to="/inbox"
+          to="/tasks"
           className={({ isActive }) =>
             `flex items-center gap-2 py-2 px-3 rounded-md ${
               isActive ? "bg-project" : "font-normal"
@@ -50,7 +50,7 @@ const Sidebar = () => {
           {({ isActive }) => (
             <>
               {isActive && <span className="text-lg">—</span>}
-              <span>Inbox</span>
+              <span>Tasks</span>
             </>
           )}
         </NavLink>

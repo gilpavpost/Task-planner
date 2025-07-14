@@ -1,6 +1,22 @@
 import MainLayout from "../layouts/MainLayout";
 
 const Task_Manager = () => {
+  const TaskCard = ({
+    title,
+    participant,
+    date,
+  }: {
+    title: string;
+    participant: string;
+    date: string;
+  }) => (
+    <div className="bg-project p-4 rounded-lg mb-3 transition-transform duration-300 ease-in-out hover:scale-[1.03] hover:shadow-sm cursor-pointer">
+      <div className="font-medium text-base mb-2">{title}</div>
+      <div className="text-sm text-gray-500">Date added: {date}</div>
+      <div className="text-sm text-gray-500">Participant: {participant}</div>
+    </div>
+  );
+
   return (
     <MainLayout>
       <div className="text-sm text-gray-500 mb-2">
@@ -11,7 +27,7 @@ const Task_Manager = () => {
 
       {/* Info boxes */}
       <div className="grid grid-cols-4 gap-4 mb-6">
-        <div className="bg-card p-4 rounded-xl text-sm ">
+        <div className="bg-card p-4 rounded-xl text-sm">
           <p>
             <span className="font-medium">Date added:</span> 12/04/2021
           </p>
@@ -43,43 +59,48 @@ const Task_Manager = () => {
       {/* Columns */}
       <div className="grid grid-cols-4 gap-4">
         {/* To Do */}
-        <div className="bg-card rounded-xl p-4">
+        <div className="bg-card rounded-xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg cursor-pointer">
           <div className="flex justify-between items-center mb-4">
             <h2 className="font-medium">To do</h2>
-            <button className="text-green-600 text-xl font-medium">+</button>
+            <button className="text-btn-green text-xl font-medium cursor-pointer transition-colors duration-200 hover:text-btn-green/80">
+              +
+            </button>
           </div>
-
           <TaskCard
             title="CRM system design"
-            priority="Medium"
+            date="12/04/2021"
             participant="Azhar"
           />
-          <TaskCard title="Statistics" priority="Low" participant="Artur" />
+          <TaskCard title="Statistics" date="12/04/2021" participant="Artur" />
           <TaskCard
             title="Priorities"
-            priority="High"
+            date="12/04/2021"
             participant="Adyl, Artur"
           />
         </div>
 
         {/* In progress */}
-        <div className="bg-card rounded-xl p-4">
+        <div className="bg-card rounded-xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg cursor-pointer">
           <h2 className="font-medium mb-4">In progress</h2>
-          <TaskCard title="Notifications" priority="Low" participant="Artur" />
-          <TaskCard title="Task types" priority="Low" participant="Adyl" />
+          <TaskCard
+            title="Notifications"
+            date="12/04/2021"
+            participant="Artur"
+          />
+          <TaskCard title="Task types" date="12/04/2021" participant="Adyl" />
         </div>
 
         {/* Closed */}
-        <div className="bg-card rounded-xl p-4">
+        <div className="bg-card rounded-xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg cursor-pointer">
           <h2 className="font-medium mb-4">Closed</h2>
         </div>
 
         {/* Frozen */}
-        <div className="bg-card rounded-xl p-4">
+        <div className="bg-card rounded-xl p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg cursor-pointer">
           <h2 className="font-medium mb-4">Frozen</h2>
           <TaskCard
             title="Todoshnik design"
-            priority="Low"
+            date="12/04/2021"
             participant="Azhar"
           />
         </div>
@@ -89,39 +110,3 @@ const Task_Manager = () => {
 };
 
 export default Task_Manager;
-
-// Reusable task card
-const TaskCard = ({
-  title,
-  priority,
-  participant,
-}: {
-  title: string;
-  priority: "Low" | "Medium" | "High";
-  participant: string;
-}) => {
-  const priorityColor = {
-    Low: "bg-btn-green text-white",
-    Medium: "bg-btn-orange text-white",
-    High: "bg-btn-red text-white",
-  };
-
-  return (
-    <div className="bg-project rounded-xl p-3 mb-3 text-sm shadow-sm">
-      <div className="flex justify-between items-center mb-1">
-        <span className="font-medium">{title}</span>
-        <span
-          className={`text-xs px-2 py-0.5 rounded-full ${priorityColor[priority]}`}
-        >
-          {priority}
-        </span>
-      </div>
-      <p className="text-xs mb-1 text-search">
-        Participant: <span className="text-black">{participant}</span>
-      </p>
-      <p className="text-xs text-search">
-        Date added: <span className="text-black">12/04/2021</span>
-      </p>
-    </div>
-  );
-};
