@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../src/assets/fonts/Rubik-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../src/assets/fonts/Rubik-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@theme {
+  --color-fusion: #fd633d;
+  --color-fusion-dark: #e05836;
+  --color-card: #f6f6f6;
+  --color-sidebar: #f8f8fb;
+  --color-black: #000000;
+  --color-btn-green: #67cb65;
+  --color-btn-orange: #ff9533;
+  --color-btn-red: #e74444;
+  --color-border: #ebebeb;
+  --color-search: #6c6c6c;
+  --color-project: #e0e4ea;
+  --color-btn-blue: #d9e5f9;
+  --font-rubik: Rubik, "sans-serif";
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.2s ease-out;
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-slide-in {
+  animation: fadeSlideIn 0.4s ease forwards;
+}
